@@ -14,10 +14,6 @@ client.connect() // returns a promise
 
 // QUERY FUNCTIONS HERE >>>
 
-// Get X products
-// const getProducts = () => {
-// };
-
 // Get a specific product
 const getOneProduct = () => {
   console.log('One product from the DB!');
@@ -40,7 +36,6 @@ const getRelatedProducts = (id, callback) => {
 };
 
 module.exports = {
-  // getProducts,
   getOneProduct,
   getStyles,
   getRelatedProducts
