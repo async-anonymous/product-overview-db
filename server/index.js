@@ -19,7 +19,26 @@ app.listen(PORT, () => {
 // Get specific product
 app.get('/products/:product_id', (req, res) => {
   db.getOneProduct(req.params.product_id, (err, data) => {
-    err ? (console.log(err), res.sendStatus(500)) : res.send(data);
+    if (err) {
+      console.log(err);
+      res.sendStatus(500);
+    } else {
+      const productData = data[0];
+      const featureArray = [];
+      for (let obj of data) {
+        featureArray.push({feature: obj.featurename, value: obj.value})
+      }
+      const product = {
+        category: productData.category,
+        default_price: productData.default_price.toFixed(2),
+        description: productData.description,
+        id: req.params.id,
+        name: productData.productname,
+        slogan: productData.slogan,
+        features: featureArray
+      }
+      res.send(product);
+    }
   });
 });
 

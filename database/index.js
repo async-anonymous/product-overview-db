@@ -15,8 +15,10 @@ client.connect() // returns a promise
 // QUERY FUNCTIONS HERE >>>
 
 // Get a specific product
+// SELECT * FROM products p WHERE id = ${id}
+// SELECT * FROM products p LEFT OUTER JOIN features f ON p.id = f.productId WHERE p.id = ${id}
 const getOneProduct = (id, callback) => {
-  client.query(`SELECT * FROM products WHERE id = ${id}`, (err, results) => {
+  client.query(`SELECT * FROM products p LEFT OUTER JOIN features f ON p.id = f.productId WHERE p.id = ${id}`, (err, results) => {
     err ? callback(err) : callback(null, results.rows);
   })
 };
