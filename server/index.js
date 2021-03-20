@@ -1,10 +1,11 @@
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
+const db = require('../database/index.js');
 require('../database/index.js');
 
 const app = express();
-const PORT = 3000;
+const PORT = 8080;
 
 app.use(express.json());
 app.use(cors());
@@ -29,18 +30,21 @@ app.get('/products', (req, res) => {
 
 // Get specific product
 app.get('/products/:product_id', (req, res) => {
-  res.sendStatus(200);
-  console.log('Get this product!');
+  db.getOneProduct((err, data) => {
+    err ? (console.log(err), res.sendStatus(500)) : res.sendStatus(200);
+  });
 });
 
 // Get all styles for a specific product
 app.get('/products/:product_id/styles', (req, res) => {
-  res.sendStatus(200);
-  console.log('Get product styles!');
-})
+  db.getStyles((err, data) => {
+    err ? (console.log(err), res.sendStatus(500)) : res.sendStatus(200);
+  });
+});
 
 // Get all related products of a specific product
 app.get('/products/:product_id/related', (req, res) => {
-  res.sendStatus(200);
-  console.log('Get related products!');
-})
+  db.getRelatedProducts((err, data) => {
+    err ? (console.log(err), res.sendStatus(500)) : res.sendStatus(200);
+  });
+});
