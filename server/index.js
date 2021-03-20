@@ -44,7 +44,7 @@ app.get('/products/:product_id/styles', (req, res) => {
 
 // Get all related products of a specific product
 app.get('/products/:product_id/related', (req, res) => {
-  db.getRelatedProducts((err, data) => {
-    err ? (console.log(err), res.sendStatus(500)) : res.sendStatus(200);
+  db.getRelatedProducts(req.params.product_id, (err, data) => {
+    err ? (console.log(err), res.sendStatus(500)) : res.send(data);
   });
 });

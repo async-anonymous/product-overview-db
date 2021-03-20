@@ -9,16 +9,14 @@ const client = new Client({ // similar to MySQL
 
 client.connect() // returns a promise
 .then(() => console.log('Connected to Postgres!'))
-// .then(() => client.query(...))
 .catch(e => console.error(e))
-.finally(() => client.end())
+// .finally(() => client.end())
 
 // QUERY FUNCTIONS HERE >>>
 
 // Get X products
-const getProducts = () => {
-
-};
+// const getProducts = () => {
+// };
 
 // Get a specific product
 const getOneProduct = () => {
@@ -31,12 +29,18 @@ const getStyles = () => {
 };
 
 // Get related product IDs for a product ID
-const getRelatedProducts = () => {
-  console.log('Related products from the DB!')
+const getRelatedProducts = (id, callback) => {
+  client.query(`SELECT related_product_id FROM related WHERE current_product_id = ${id}`, (err, results) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, results.rows);
+    }
+  })
 };
 
 module.exports = {
-  getProducts,
+  // getProducts,
   getOneProduct,
   getStyles,
   getRelatedProducts
