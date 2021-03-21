@@ -44,6 +44,7 @@ app.get('/products/:product_id', (req, res) => {
 
 // Get all styles for a specific product
 app.get('/products/:product_id/styles', (req, res) => {
+  console.log('styles router');
   db.getStyles(req.params.product_id, (err, data) => {
     err ? (console.log(err), res.sendStatus(500)) : res.send(data);
   });

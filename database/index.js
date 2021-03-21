@@ -24,8 +24,10 @@ const getOneProduct = (id, callback) => {
 };
 
 // Get styles for a product ID
+// SELECT * FROM styles WHERE productId = ${id}
+// SELECT * FROM styles st FULL OUTER JOIN photos p ON st.id = p.styleId FULL OUTER JOIN skus sk ON st.id = sk.styleId WHERE st.id = ${id}
 const getStyles = (id, callback) => {
-  client.query(`SELECT * FROM styles WHERE productId = ${id}`, (err, results) => {
+  client.query(`SELECT * FROM styles st FULL OUTER JOIN photos p ON st.id = p.styleId FULL OUTER JOIN skus sk ON st.id = sk.styleId WHERE st.id = ${id}`, (err, results) => {
     err ? callback(err) : callback(null, results.rows);
   })
 };
