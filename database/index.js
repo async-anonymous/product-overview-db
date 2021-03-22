@@ -26,21 +26,25 @@ const getOneProduct = (id, callback) => {
 // Get styles for a product ID
 // SELECT * FROM styles WHERE productId = ${id}
 // SELECT * FROM styles st FULL OUTER JOIN photos p ON st.id = p.styleId FULL OUTER JOIN skus sk ON st.id = sk.styleId WHERE st.id = ${id}
+// SELECT id, sale_price, original_price, default_style, name, photos, skus FROM stylesplus WHERE productId = ${id}
 /*
-SELECT styles.id AS id,
-styles.productId,
-styles.sale_price,
-styles.original_price,
-styles.default_style,
-styles.name,
-jsonb_agg(to_jsonb(photos)) AS photos,
-jsonb_agg(to_jsonb(skus)) AS skus
-FROM styles
-JOIN photos ON styles.id = photos.styleId
-JOIN skus ON styles.id = skus.styleId
-WHERE productId = ${id}
-GROUP BY styles.id
+    SELECT styles.id AS id,
+    styles.productId,
+    styles.sale_price,
+    styles.original_price,
+    styles.default_style,
+    styles.name,
+    jsonb_agg(DISTINCT jsonb_build_object('url',photos.url,'thumbnail_url',photos.thumbnail_url)) AS photos,
+    jsonb_object_agg(skus.id,(jsonb_build_object('quantity',skus.quantity,'size',skus.size))) AS skus
+    FROM styles
+    JOIN photos ON styles.id = photos.styleId
+    JOIN skus ON styles.id = skus.styleId
+    WHERE productId = ${id}
+    GROUP BY styles.id
 */
+
+// jsonb_agg(DISTINCT to_jsonb(skus)) AS skus
+// jsonb_agg(DISTINCT jsonb_build_object('quantity',skus.quantity,'size',skus.size)) AS skus
 const getStyles = (id, callback) => {
   client.query(`SELECT id, sale_price, original_price, default_style, name, photos, skus FROM stylesplus WHERE productId = ${id}`, (err, results) => {
     err ? callback(err) : callback(null, results.rows);
