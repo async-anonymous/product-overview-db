@@ -1,5 +1,11 @@
 {
   "cSpell.ignoreWords": [
-    "postgres"
+    "featurename",
+    "jsonb",
+    "postgres",
+    "productname",
+    "skus",
+    "stylesplus",
+    "to"
   ]
 }
