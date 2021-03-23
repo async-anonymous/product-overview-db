@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS styles (
   id BIGSERIAL,
   productId INTEGER,
   name VARCHAR(55),
-  sale_price INTEGER,
+  sale_price VARCHAR(25),
   original_price INTEGER,
   default_style BOOLEAN,
   PRIMARY KEY(id),
