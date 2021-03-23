@@ -1,6 +1,6 @@
 const { Client } = require('pg'); // uses Client from node-postgres
 const client = new Client({ // similar to MySQL
-  user: 'jim',
+  user: 'postgres',
   password: '',
   host: 'localhost',
   port: 5432,
