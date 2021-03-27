@@ -16,6 +16,11 @@ app.listen(PORT, () => {
 
 // ROUTERS
 
+// Loader.io verification
+app.get('/loaderio-1aea2c25c89d54ee1fcca2b999a28de3', (req, res) => {
+  res.send('loaderio-1aea2c25c89d54ee1fcca2b999a28de3');
+});
+
 // Get specific product
 app.get('/products/:product_id', (req, res) => {
   db.getOneProduct(req.params.product_id, (err, data) => {
