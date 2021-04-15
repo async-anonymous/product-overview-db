@@ -1,16 +1,16 @@
 # Product Overview System Design
 A complete backend system design to support the product overview component of an e-commerce retail client, with the ultimate goal of supporting up to 10,000 requests per second.
 
-## Database
+### Database
 Millions of records were imported into a PostgreSQL database using complex joins across multiple tables to serve product, style, and sku data.
 
-## Load Balancer
+### Load Balancer
 NGINX and AWS Load Balancer distributed traffic across the servers using a round robin method.
 
-## Server
+### Server
 Servers ran on Node and Express to communication between the load balancer and the database.
 
-## Deployment
+### Deployment
 10 servers, 1 load balancer, and 1 database were deployed across 12 AWS EC2 micro-instances.
 
 ### Engineering Team
